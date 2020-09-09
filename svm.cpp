@@ -2585,6 +2585,7 @@ double svm_predict(const svm_model *model, const svm_node *x)
 	else
 		dec_values = Malloc(double, nr_class*(nr_class-1)/2);
 	double pred_result = svm_predict_values(model, x, dec_values);
+	printf("sp %f\n", dec_values[0]*model->label[0]);
 	free(dec_values);
 	return pred_result;
 }
@@ -2599,7 +2600,7 @@ double svm_predict_probability(
 		int nr_class = model->nr_class;
 		double *dec_values = Malloc(double, nr_class*(nr_class-1)/2);
 		svm_predict_values(model, x, dec_values);
-
+		printf("spp %f\n", dec_values[0]*model->label[0]);
 		double min_prob=1e-7;
 		double **pairwise_prob=Malloc(double *,nr_class);
 		for(i=0;i<nr_class;i++)
